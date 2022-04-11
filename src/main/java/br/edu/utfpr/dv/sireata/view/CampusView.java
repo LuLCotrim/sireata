@@ -28,8 +28,7 @@ public class CampusView extends ListView {
 		this.getGrid().getColumns().get(1).setWidth(100);
 		
 		try{
-			CampusBO bo = new CampusBO();
-			List<Campus> list = bo.listarTodos(false);
+			List<Campus> list = new CampusBO().listarTodos(false);
 			
 			for(Campus c : list){
 				Object itemId = this.getGrid().addRow(c.getNome(), (c.isAtivo() ? "Sim" : "Não"));
@@ -50,8 +49,7 @@ public class CampusView extends ListView {
 	@Override
 	public void editar(Object id) {
 		try{
-			CampusBO bo = new CampusBO();
-			Campus campus = bo.buscarPorId((int)id);
+			Campus campus = new CampusBO().buscarPorId((int)id);
 			
 			UI.getCurrent().addWindow(new EditarCampusWindow(campus, this));
 		}catch(Exception e){

@@ -163,8 +163,7 @@ public class EditarOrgaoWindow extends EditarWindow {
 	private void carregarOrgao(){
 		try{
 			if((this.orgao.getDepartamento() != null) && (this.orgao.getDepartamento().getIdDepartamento() != 0)){
-				CampusBO bo = new CampusBO();
-				Campus campus = bo.buscarPorDepartamento(this.orgao.getDepartamento().getIdDepartamento());
+				Campus campus = new CampusBO().buscarPorDepartamento(this.orgao.getDepartamento().getIdDepartamento());
 				
 				this.cbCampus.setCampus(campus);
 				
@@ -209,8 +208,6 @@ public class EditarOrgaoWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			OrgaoBO bo = new OrgaoBO();
-			
 			this.orgao.setDepartamento(this.cbDepartamento.getDepartamento());
 			this.orgao.setNome(this.tfNome.getValue());
 			this.orgao.setNomeCompleto(this.tfNomeCompleto.getValue());
@@ -219,7 +216,7 @@ public class EditarOrgaoWindow extends EditarWindow {
 			this.orgao.setSecretario(this.cbSecretario.getUsuario());
 			this.orgao.setAtivo(this.cbAtivo.getValue());
 			
-			bo.salvar(this.orgao);
+			new OrgaoBO().salvar(this.orgao);
 			
 			Notification.show("Salvar Órgão", "Órgão salvo com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			

@@ -105,7 +105,6 @@ public class EditarComentarioWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			ComentarioBO bo = new ComentarioBO();
 			AtaBO abo = new AtaBO();
 			Ata ata = abo.buscarPorPauta(this.comentario.getPauta().getIdPauta());
 			
@@ -119,7 +118,7 @@ public class EditarComentarioWindow extends EditarWindow {
 				this.comentario.setMotivo(this.taMotivo.getValue());
 			}
 						
-			bo.salvar(this.comentario);
+			new ComentarioBO().salvar(this.comentario);
 			
 			Notification.show("Salvar Comentário", "Comentárip salvo com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			

@@ -48,8 +48,7 @@ public class UsuarioView extends ListView {
 		this.getGrid().getColumns().get(0).setWidth(300);
 		
 		try {
-			UsuarioBO bo = new UsuarioBO();
-	    	List<Usuario> list = bo.listar(this.tfNome.getValue(), this.cbAtivo.getValue(), this.cbExterno.getValue());
+	    	List<Usuario> list = new UsuarioBO().listar(this.tfNome.getValue(), this.cbAtivo.getValue(), this.cbExterno.getValue());
 	    	
 	    	for(Usuario u : list){
 				Object itemId = this.getGrid().addRow(u.getLogin(), u.getNome(), u.getEmail());
@@ -70,8 +69,7 @@ public class UsuarioView extends ListView {
 	@Override
 	public void editar(Object id) {
 		try {
-			UsuarioBO bo = new UsuarioBO();
-			Usuario usuario = bo.buscarPorId((int)id);
+			Usuario usuario = new UsuarioBO().buscarPorId((int)id);
 			
 			UI.getCurrent().addWindow(new EditarUsuarioWindow(usuario, this));
 		} catch (Exception e) {

@@ -11,9 +11,7 @@ public class PautaBO {
 	
 	public Pauta buscarPorId(int id) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
-			
-			return dao.buscarPorId(id);
+			return new PautaDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,9 +21,7 @@ public class PautaBO {
 	
 	public List<Pauta> listarPorAta(int idAta) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
-			
-			return dao.listarPorAta(idAta);
+			return new PautaDAO().listarPorAta(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -47,9 +43,7 @@ public class PautaBO {
 			
 			this.validarDados(pauta);
 			
-			PautaDAO dao = new PautaDAO();
-			
-			return dao.salvar(pauta);
+			return new PautaDAO().salvar(pauta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -63,9 +57,7 @@ public class PautaBO {
 	
 	public void excluir(int id) throws Exception{
 		try{
-			PautaDAO dao = new PautaDAO();
-			
-			dao.excluir(id);
+			new PautaDAO().excluir(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

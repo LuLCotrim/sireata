@@ -43,8 +43,7 @@ public class EditarSenhaWindow extends EditarWindow {
 				throw new Exception("As senhas não conferem.");
 			}
 			
-			UsuarioBO bo = new UsuarioBO();
-			Usuario usuario = bo.alterarSenha(Session.getUsuario().getIdUsuario(), this.tfSenhaAtual.getValue(), this.tfNovaSenha.getValue());
+			Usuario usuario = new UsuarioBO().alterarSenha(Session.getUsuario().getIdUsuario(), this.tfSenhaAtual.getValue(), this.tfNovaSenha.getValue());
 			
 			Session.setUsuario(usuario);
 			

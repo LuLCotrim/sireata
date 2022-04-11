@@ -123,8 +123,7 @@ public class AtaView extends ListView {
 			Notification.show("Visualizar Ata", "Selecione uma ata para visualizar.", Notification.Type.WARNING_MESSAGE);
 		} else {
 			try {
-				AtaBO bo = new AtaBO();
-				Ata ata = bo.buscarPorId((int)id);
+				Ata ata = new AtaBO().buscarPorId((int)id);
 				
 				this.showReport(ata.getDocumento());
 			} catch(Exception e) {
@@ -189,8 +188,7 @@ public class AtaView extends ListView {
 	@Override
 	public void editar(Object id) {
 		try{
-			AtaBO bo = new AtaBO();
-			Ata ata = bo.buscarPorId((int)id);
+			Ata ata = new AtaBO().buscarPorId((int)id);
 			
 			UI.getCurrent().addWindow(new EditarAtaWindow(ata, this));
 		}catch(Exception e){

@@ -97,8 +97,6 @@ public class EditarUsuarioWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			UsuarioBO bo = new UsuarioBO();
-			
 			if(this.cbExterno.getValue()){
 				this.usuario.setNome(this.tfNome.getValue());
 			}
@@ -116,7 +114,7 @@ public class EditarUsuarioWindow extends EditarWindow {
 				}
 			}
 			
-			bo.salvar(usuario);
+			new UsuarioBO().salvar(usuario);
 			
 			Notification.show("Salvar Usuário", "Usuário salvo com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			

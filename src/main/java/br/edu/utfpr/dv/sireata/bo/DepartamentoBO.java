@@ -11,9 +11,7 @@ public class DepartamentoBO {
 	
 	public Departamento buscarPorId(int id) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.buscarPorId(id);
+			return new DepartamentoDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,9 +21,7 @@ public class DepartamentoBO {
 	
 	public Departamento buscarPorOrgao(int idOrgao) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.buscarPorOrgao(idOrgao);
+			return new DepartamentoDAO().buscarPorOrgao(idOrgao);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -35,9 +31,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarTodos(boolean apenasAtivos) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.listarTodos(apenasAtivos);
+			return new DepartamentoDAO().listarTodos(apenasAtivos);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -47,9 +41,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarPorCampus(int idCampus, boolean apenasAtivos) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.listarPorCampus(idCampus, apenasAtivos);
+			return new DepartamentoDAO().listarPorCampus(idCampus, apenasAtivos);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -59,9 +51,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarParaCriacaoAta(int idCampus, int idUsuario) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.listarParaCriacaoAta(idCampus, idUsuario);
+			return new DepartamentoDAO().listarParaCriacaoAta(idCampus, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -71,9 +61,7 @@ public class DepartamentoBO {
 	
 	public List<Departamento> listarParaConsultaAtas(int idCampus, int idUsuario) throws Exception{
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.listarParaConsultaAtas(idCampus, idUsuario);
+			return new DepartamentoDAO().listarParaConsultaAtas(idCampus, idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -90,9 +78,7 @@ public class DepartamentoBO {
 		}
 		
 		try{
-			DepartamentoDAO dao = new DepartamentoDAO();
-			
-			return dao.salvar(departamento);
+			return new DepartamentoDAO().salvar(departamento);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

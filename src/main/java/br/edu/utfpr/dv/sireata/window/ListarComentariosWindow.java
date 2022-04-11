@@ -63,9 +63,7 @@ public class ListarComentariosWindow extends Window {
 	
 	private void carregarComentarios(){
 		try {
-			ComentarioBO bo = new ComentarioBO();
-			
-			this.comentarios = bo.listarPorPauta(this.pauta.getIdPauta());
+			this.comentarios = new ComentarioBO().listarPorPauta(this.pauta.getIdPauta());
 			
 			for(Comentario c : this.comentarios){
 				this.gridComentarios.addRow(c.getUsuario().getNome(), (c.getSituacao() == SituacaoComentario.ACEITO ? "Sim" : (c.getSituacao() == SituacaoComentario.RECUSADO ? "Não" : "-")));

@@ -111,8 +111,7 @@ public class LoginView extends CustomComponent implements View {
         String password = this.password.getValue();
         
         try{
-        	UsuarioBO bo = new UsuarioBO();
-        	Usuario usuario = bo.validarLogin(username, password);
+        	Usuario usuario = new UsuarioBO().validarLogin(username, password);
         	
         	Session.setUsuario(usuario);
             getUI().getNavigator().navigateTo(MainView.NAME);

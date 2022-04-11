@@ -12,9 +12,7 @@ public class ComentarioBO {
 	
 	public Comentario buscarPorId(int id) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
-			return dao.buscarPorId(id);
+			return new ComentarioDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -24,9 +22,7 @@ public class ComentarioBO {
 	
 	public Comentario buscarPorUsuario(int idUsuario, int idPauta) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
-			return dao.buscarPorUsuario(idUsuario, idPauta);
+			return new ComentarioDAO().buscarPorUsuario(idUsuario, idPauta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -36,9 +32,7 @@ public class ComentarioBO {
 	
 	public List<Comentario> listarPorPauta(int idPauta) throws Exception{
 		try{
-			ComentarioDAO dao = new ComentarioDAO();
-			
-			return dao.listarPorPauta(idPauta);
+			return new ComentarioDAO().listarPorPauta(idPauta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -63,9 +57,7 @@ public class ComentarioBO {
 			
 			this.validarDados(comentario);
 			
-			ComentarioDAO dao = new ComentarioDAO();
-			
-			return dao.salvar(comentario);
+			return new ComentarioDAO().salvar(comentario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

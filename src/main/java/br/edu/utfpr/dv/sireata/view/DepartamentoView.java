@@ -35,8 +35,7 @@ public class DepartamentoView extends ListView {
 		this.getGrid().getColumns().get(1).setWidth(100);
 		
 		try{
-			DepartamentoBO bo = new DepartamentoBO();
-			List<Departamento> list = bo.listarPorCampus((this.cbCampus.getCampus() == null ? 0 : this.cbCampus.getCampus().getIdCampus()), false);
+			List<Departamento> list = new DepartamentoBO().listarPorCampus((this.cbCampus.getCampus() == null ? 0 : this.cbCampus.getCampus().getIdCampus()), false);
 			
 			for(Departamento d : list){
 				Object itemId = this.getGrid().addRow(d.getNome(), (d.isAtivo() ? "Sim" : "Não"));
@@ -61,8 +60,7 @@ public class DepartamentoView extends ListView {
 	@Override
 	public void editar(Object id) {
 		try{
-			DepartamentoBO bo = new DepartamentoBO();
-			Departamento departamento = bo.buscarPorId((int)id);
+			Departamento departamento = new DepartamentoBO().buscarPorId((int)id);
 			
 			UI.getCurrent().addWindow(new EditarDepartamentoWindow(departamento, this));
 		}catch(Exception e){

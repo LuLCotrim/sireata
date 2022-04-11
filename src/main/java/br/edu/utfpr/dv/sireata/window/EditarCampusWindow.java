@@ -104,14 +104,12 @@ public class EditarCampusWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			CampusBO bo = new CampusBO();
-			
 			this.campus.setNome(this.tfNome.getValue());
 			this.campus.setEndereco(this.tfEndereco.getValue());
 			this.campus.setAtivo(this.cbAtivo.getValue());
 			this.campus.setSite(this.tfSite.getValue());
 			
-			bo.salvar(this.campus);
+			new CampusBO().salvar(this.campus);
 			
 			Notification.show("Salvar Câmpus", "Câmpus salvo com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			

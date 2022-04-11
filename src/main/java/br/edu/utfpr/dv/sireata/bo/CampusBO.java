@@ -11,9 +11,7 @@ public class CampusBO {
 	
 	public Campus buscarPorId(int id) throws Exception{
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.buscarPorId(id);
+			return new CampusDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,9 +21,7 @@ public class CampusBO {
 	
 	public Campus buscarPorDepartamento(int idDepartamento) throws Exception{
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.buscarPorDepartamento(idDepartamento);
+			return new CampusDAO().buscarPorDepartamento(idDepartamento);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -35,9 +31,7 @@ public class CampusBO {
 	
 	public List<Campus> listarTodos(boolean apenasAtivos) throws Exception{
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.listarTodos(apenasAtivos);
+			return new CampusDAO().listarTodos(apenasAtivos);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -47,9 +41,7 @@ public class CampusBO {
 	
 	public List<Campus> listarParaCriacaoAta(int idUsuario) throws Exception{
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.listarParaCriacaoAta(idUsuario);
+			return new CampusDAO().listarParaCriacaoAta(idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -59,9 +51,7 @@ public class CampusBO {
 	
 	public List<Campus> listarParaConsultaAtas(int idUsuario) throws Exception{
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.listarParaConsultaAtas(idUsuario);
+			return new CampusDAO().listarParaConsultaAtas(idUsuario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -75,9 +65,7 @@ public class CampusBO {
 		}
 		
 		try{
-			CampusDAO dao = new CampusDAO();
-			
-			return dao.salvar(campus);
+			return new CampusDAO().salvar(campus);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

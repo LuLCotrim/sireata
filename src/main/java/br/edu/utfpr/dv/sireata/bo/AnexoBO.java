@@ -11,9 +11,7 @@ public class AnexoBO {
 
 	public Anexo buscarPorId(int id) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
-			
-			return dao.buscarPorId(id);
+			return new AnexoDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,9 +21,7 @@ public class AnexoBO {
 	
 	public List<Anexo> listarPorAta(int idAta) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
-			
-			return dao.listarPorAta(idAta);
+			return new AnexoDAO().listarPorAta(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -50,9 +46,7 @@ public class AnexoBO {
 			
 			this.validarDados(anexo);
 			
-			AnexoDAO dao = new AnexoDAO();
-			
-			return dao.salvar(anexo);
+			return new AnexoDAO().salvar(anexo);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -66,9 +60,7 @@ public class AnexoBO {
 	
 	public void excluir(int id) throws Exception{
 		try{
-			AnexoDAO dao = new AnexoDAO();
-			
-			dao.excluir(id);
+			new AnexoDAO().excluir(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

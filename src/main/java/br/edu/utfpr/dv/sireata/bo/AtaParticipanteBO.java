@@ -11,9 +11,7 @@ public class AtaParticipanteBO {
 	
 	public AtaParticipante buscarPorId(int id) throws Exception{
 		try{
-			AtaParticipanteDAO dao = new AtaParticipanteDAO();
-			
-			return dao.buscarPorId(id);
+			return new AtaParticipanteDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -23,9 +21,7 @@ public class AtaParticipanteBO {
 	
 	public List<AtaParticipante> listarPorAta(int idAta) throws Exception{
 		try{
-			AtaParticipanteDAO dao = new AtaParticipanteDAO();
-			
-			return dao.listarPorAta(idAta);
+			return new AtaParticipanteDAO().listarPorAta(idAta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -53,9 +49,7 @@ public class AtaParticipanteBO {
 			
 			this.validarDados(participante);
 			
-			AtaParticipanteDAO dao = new AtaParticipanteDAO();
-			
-			return dao.salvar(participante);
+			return new AtaParticipanteDAO().salvar(participante);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -69,9 +63,7 @@ public class AtaParticipanteBO {
 	
 	public void excluir(int id) throws Exception{
 		try{
-			AtaParticipanteDAO dao = new AtaParticipanteDAO();
-			
-			dao.excluir(id);
+			new AtaParticipanteDAO().excluir(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

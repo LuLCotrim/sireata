@@ -77,8 +77,7 @@ public class OrgaoView extends ListView {
 	@Override
 	public void editar(Object id) {
 		try{
-			OrgaoBO bo = new OrgaoBO();
-			Orgao orgao = bo.buscarPorId((int)id);
+			Orgao orgao = new OrgaoBO().buscarPorId((int)id);
 			
 			UI.getCurrent().addWindow(new EditarOrgaoWindow(orgao, this));
 		}catch(Exception e){

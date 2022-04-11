@@ -118,8 +118,7 @@ public class EditarPautaWindow extends EditarWindow {
 	
 	private void incluirComentario(){
 		try {
-			ComentarioBO bo = new ComentarioBO();
-			Comentario comentario = bo.buscarPorUsuario(Session.getUsuario().getIdUsuario(), this.pauta.getIdPauta());
+			Comentario comentario = new ComentarioBO().buscarPorUsuario(Session.getUsuario().getIdUsuario(), this.pauta.getIdPauta());
 			
 			if(comentario == null){
 				comentario = new Comentario();

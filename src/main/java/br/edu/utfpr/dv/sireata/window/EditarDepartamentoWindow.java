@@ -116,15 +116,13 @@ public class EditarDepartamentoWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			DepartamentoBO bo = new DepartamentoBO();
-			
 			this.departamento.setCampus(this.cbCampus.getCampus());
 			this.departamento.setNome(this.tfNome.getValue());
 			this.departamento.setAtivo(this.cbAtivo.getValue());
 			this.departamento.setSite(this.tfSite.getValue());
 			this.departamento.setNomeCompleto(this.tfNomeCompleto.getValue());
 			
-			bo.salvar(this.departamento);
+			new DepartamentoBO().salvar(this.departamento);
 			
 			Notification.show("Salvar Departamento", "Departamento salvo com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			

@@ -435,11 +435,9 @@ public class EditarAtaWindow extends EditarWindow {
 	private void carregarAta(){
 		try{
 			if((this.ata.getOrgao() != null) && (this.ata.getOrgao().getIdOrgao() != 0)){
-				DepartamentoBO dbo = new DepartamentoBO();
-				Departamento departamento = dbo.buscarPorOrgao(this.ata.getOrgao().getIdOrgao());
+				Departamento departamento = new DepartamentoBO().buscarPorOrgao(this.ata.getOrgao().getIdOrgao());
 				
-				CampusBO cbo = new CampusBO();
-				Campus campus = cbo.buscarPorDepartamento(departamento.getIdDepartamento());
+				Campus campus = new CampusBO().buscarPorDepartamento(departamento.getIdDepartamento());
 				
 				this.cbCampus.setCampus(campus);
 				
@@ -491,9 +489,8 @@ public class EditarAtaWindow extends EditarWindow {
 			
 			try{
 				List<AtaReport> list = new ArrayList<AtaReport>();
-				AtaBO bo = new AtaBO();
 				
-				if(!bo.isPresidenteOuSecretario(Session.getUsuario().getIdUsuario(), this.ata.getIdAta())){
+				if(!new AtaBO().isPresidenteOuSecretario(Session.getUsuario().getIdUsuario(), this.ata.getIdAta())){
 					this.btLiberarComentarios.setVisible(false);
 					this.btBloquearComentarios.setVisible(false);
 					this.btPublicar.setVisible(false);
@@ -519,9 +516,7 @@ public class EditarAtaWindow extends EditarWindow {
 			}
 		
 			try {
-				AtaBO bo = new AtaBO();
-				
-				if(bo.temComentarios(this.ata)){
+				if(new AtaBO().temComentarios(this.ata)){
 					this.btRemoverParticipante.setEnabled(false);
 					this.btRemoverPauta.setEnabled(false);
 				}
@@ -533,9 +528,7 @@ public class EditarAtaWindow extends EditarWindow {
 	
 	private void visualizarAta() {
 		try {
-			AtaBO bo = new AtaBO();
-			
-			this.showReport(bo.gerarAta(this.ata));
+			this.showReport(new AtaBO().gerarAta(this.ata));
 		} catch(Exception e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -546,8 +539,6 @@ public class EditarAtaWindow extends EditarWindow {
 	@Override
 	public void salvar() {
 		try{
-			AtaBO bo = new AtaBO();
-			
 			this.ata.setOrgao(this.cbOrgao.getOrgao());
 			this.ata.setPresidente(this.cbPresidente.getUsuario());
 			this.ata.setSecretario(this.cbSecretario.getUsuario());
@@ -559,7 +550,7 @@ public class EditarAtaWindow extends EditarWindow {
 			this.ata.setLocalCompleto(this.tfLocalCompleto.getValue());
 			this.ata.setConsideracoesIniciais(this.taConsideracoesIniciais.getValue());
 			
-			bo.salvar(this.ata);
+			new AtaBO().salvar(this.ata);
 			
 			Notification.show("Salvar Ata", "Ata salva com sucesso.", Notification.Type.HUMANIZED_MESSAGE);
 			
@@ -575,8 +566,7 @@ public class EditarAtaWindow extends EditarWindow {
 	private void carregarNumeroAta(){
 		if(ata.getIdAta() == 0){
 			try {
-				AtaBO bo = new AtaBO();
-				int numero = bo.buscarProximoNumeroAta(this.cbOrgao.getOrgao().getIdOrgao(), DateUtils.getYear(this.dfData.getValue()), (TipoAta)this.cbTipo.getValue());
+				int numero = new AtaBO().buscarProximoNumeroAta(this.cbOrgao.getOrgao().getIdOrgao(), DateUtils.getYear(this.dfData.getValue()), (TipoAta)this.cbTipo.getValue());
 				
 				this.tfNumero.setValue(String.valueOf(numero));
 			} catch (Exception e) {
@@ -591,8 +581,7 @@ public class EditarAtaWindow extends EditarWindow {
 		this.ata.setParticipantes(new ArrayList<AtaParticipante>());
 		
 		try {
-			OrgaoBO bo = new OrgaoBO();
-			Orgao orgao = bo.buscarPorId(this.cbOrgao.getOrgao().getIdOrgao());
+			Orgao orgao = new OrgaoBO().buscarPorId(this.cbOrgao.getOrgao().getIdOrgao());
 			
 			if(orgao != null){
 				for(OrgaoMembro membro : orgao.getMembros()){
@@ -633,9 +622,7 @@ public class EditarAtaWindow extends EditarWindow {
 				this.ata.setParticipantes(new ArrayList<AtaParticipante>());
 			}else{
 				try {
-					AtaParticipanteBO bo = new AtaParticipanteBO();
-					
-					this.ata.setParticipantes(bo.listarPorAta(this.ata.getIdAta()));
+					this.ata.setParticipantes(new AtaParticipanteBO().listarPorAta(this.ata.getIdAta()));
 				} catch (Exception e) {
 					Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 					
@@ -665,9 +652,7 @@ public class EditarAtaWindow extends EditarWindow {
 				this.ata.setAnexos(new ArrayList<Anexo>());
 			}else{
 				try {
-					AnexoBO bo = new AnexoBO();
-					
-					this.ata.setAnexos(bo.listarPorAta(this.ata.getIdAta()));
+					this.ata.setAnexos(new AnexoBO().listarPorAta(this.ata.getIdAta()));
 				} catch (Exception e) {
 					Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 					
@@ -714,8 +699,7 @@ public class EditarAtaWindow extends EditarWindow {
 				this.ata.setPauta(new ArrayList<Pauta>());
 			}else{
 				try {
-					PautaBO bo = new PautaBO();
-					this.ata.setPauta(bo.listarPorAta(this.ata.getIdAta()));
+					this.ata.setPauta(new PautaBO().listarPorAta(this.ata.getIdAta()));
 				} catch (Exception e) {
 					Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 					
@@ -965,9 +949,7 @@ public class EditarAtaWindow extends EditarWindow {
                     		Pauta pauta = ata.getPauta().get(index);
                     		
                 			if(pauta.getIdPauta() > 0){
-	                			PautaBO bo = new PautaBO();
-	                			
-								bo.excluir(pauta);
+								new PautaBO().excluir(pauta);
                 			}
                         	
                         	ata.getPauta().remove(index);
@@ -1036,9 +1018,7 @@ public class EditarAtaWindow extends EditarWindow {
 	
 	private void liberarComentarios(){
 		try {
-			AtaBO bo = new AtaBO();
-			
-			bo.liberarComentarios(this.ata);
+			new AtaBO().liberarComentarios(this.ata);
 			
 			this.ata.setAceitarComentarios(true);
 			
@@ -1053,9 +1033,7 @@ public class EditarAtaWindow extends EditarWindow {
 	
 	private void bloquearComentarios(){
 		try {
-			AtaBO bo = new AtaBO();
-			
-			bo.bloquearComentarios(this.ata);
+			new AtaBO().bloquearComentarios(this.ata);
 			
 			this.ata.setAceitarComentarios(false);
 			
@@ -1074,9 +1052,7 @@ public class EditarAtaWindow extends EditarWindow {
                 public void onClose(ConfirmDialog dialog) {
                     if (dialog.isConfirmed()) {
                     	try {
-                    		AtaBO bo = new AtaBO();
-                    		
-                    		bo.publicar(ata);
+                    		new AtaBO().publicar(ata);
                     		
                     		Notification.show("Publicar Ata", "Ata publicada com sucesso.", Notification.Type.WARNING_MESSAGE);
                     		

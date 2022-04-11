@@ -19,9 +19,7 @@ public class UsuarioBO {
 	
 	public List<Usuario> listarTodos(boolean apenasAtivos) throws Exception{
 		try {
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.listarTodos(apenasAtivos);
+			return new UsuarioDAO().listarTodos(apenasAtivos);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -31,9 +29,7 @@ public class UsuarioBO {
 	
 	public List<Usuario> listar(String nome, boolean apenasAtivos, boolean apenasExternos) throws Exception {
 		try{
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.listar(nome.trim(), apenasAtivos, apenasExternos);
+			return new UsuarioDAO().listar(nome.trim(), apenasAtivos, apenasExternos);
 		}catch(SQLException e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -53,9 +49,7 @@ public class UsuarioBO {
 				throw new Exception("Informe o nome.");
 			}
 			
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.salvar(usuario);
+			return new UsuarioDAO().salvar(usuario);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -81,9 +75,7 @@ public class UsuarioBO {
 	
 	public Usuario buscarPorLogin(String login) throws Exception{
 		try {
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.buscarPorLogin(login);
+			return new UsuarioDAO().buscarPorLogin(login);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -93,9 +85,7 @@ public class UsuarioBO {
 	
 	public Usuario buscarPorId(int id) throws Exception{
 		try {
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.buscarPorId(id);
+			return new UsuarioDAO().buscarPorId(id);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -105,9 +95,7 @@ public class UsuarioBO {
 	
 	public String buscarEmail(int id) throws Exception{
 		try {
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.buscarEmail(id);
+			return new UsuarioDAO().buscarEmail(id);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -233,16 +221,12 @@ public class UsuarioBO {
 	}
 	
 	public String[] buscarEmails(int[] ids) throws Exception{
-		UsuarioDAO dao = new UsuarioDAO();
-		
-		return dao.buscarEmails(ids);
+		return new UsuarioDAO().buscarEmails(ids);
 	}
 	
 	public boolean podeCriarAta(int idUsuario) throws Exception{
 		try {
-			UsuarioDAO dao = new UsuarioDAO();
-			
-			return dao.podeCriarAta(idUsuario);
+			return new UsuarioDAO().podeCriarAta(idUsuario);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			

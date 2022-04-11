@@ -124,18 +124,17 @@ public class UsuarioDAO {
 	}
 	
 	public List<Usuario> listar(String nome, boolean apenasAtivos, boolean apenasExternos) throws SQLException {
-		String sql = "SELECT * FROM usuarios WHERE login <> 'admin' " + 
-				(!nome.isEmpty() ? " AND nome LIKE ? " : "") +
-				(apenasAtivos ? " AND ativo = 1 " : "") +
-				(apenasExternos ? " AND externo = 1 " : "") +
-				"ORDER BY nome";
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		try{
 			conn = ConnectionDAO.getInstance().getConnection();
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE login <> 'admin' " + 
+										(!nome.isEmpty() ? " AND nome LIKE ? " : "") +
+										(apenasAtivos ? " AND ativo = 1 " : "") +
+										(apenasExternos ? " AND externo = 1 " : "") +
+										"ORDER BY nome");
 		
 			if(!nome.isEmpty()){
 				stmt.setString(1, "%" + nome + "%");
