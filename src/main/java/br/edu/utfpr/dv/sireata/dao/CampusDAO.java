@@ -12,6 +12,24 @@ import java.util.List;
 import br.edu.utfpr.dv.sireata.model.Campus;
 
 public class CampusDAO {
+
+	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
+
+	private void closeConections(Connection conn, Statement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
 	
 	public Campus buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -32,12 +50,7 @@ public class CampusDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -60,12 +73,7 @@ public class CampusDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -88,12 +96,7 @@ public class CampusDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -120,12 +123,7 @@ public class CampusDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -154,12 +152,7 @@ public class CampusDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -204,12 +197,7 @@ public class CampusDAO {
 			
 			return campus.getIdCampus();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	

@@ -14,6 +14,24 @@ import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
 import br.edu.utfpr.dv.sireata.util.DateUtils;
 
 public class AtaDAO {
+
+	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
+
+	private void closeConections(Connection conn, Statement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
 	
 	public Ata buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -40,12 +58,7 @@ public class AtaDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -77,12 +90,7 @@ public class AtaDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -112,12 +120,7 @@ public class AtaDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -143,12 +146,7 @@ public class AtaDAO {
 				return 1;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -182,12 +180,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -215,12 +208,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -248,12 +236,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -281,12 +264,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -314,12 +292,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -348,12 +321,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -382,12 +350,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -416,12 +379,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -450,12 +408,7 @@ public class AtaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -506,12 +459,7 @@ public class AtaDAO {
 			
 			return ata.getIdAta();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -615,12 +563,7 @@ public class AtaDAO {
 				return false;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -638,12 +581,7 @@ public class AtaDAO {
 		
 			return rs.next();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -661,12 +599,7 @@ public class AtaDAO {
 		
 			return rs.next();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -688,12 +621,7 @@ public class AtaDAO {
 				return false;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	

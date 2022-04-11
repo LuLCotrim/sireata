@@ -11,6 +11,24 @@ import java.util.List;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
 public class PautaDAO {
+
+	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
+
+	private void closeConections(Connection conn, Statement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
 	
 	public Pauta buscarPorId(int id) throws SQLException{
 		Connection conn = null;
@@ -31,12 +49,7 @@ public class PautaDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -59,12 +72,7 @@ public class PautaDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -104,12 +112,7 @@ public class PautaDAO {
 			
 			return pauta.getIdPauta();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	

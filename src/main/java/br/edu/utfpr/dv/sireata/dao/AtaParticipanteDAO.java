@@ -12,6 +12,24 @@ import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 
 public class AtaParticipanteDAO {
 	
+	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
+
+	private void closeConections(Connection conn, Statement stmt, ResultSet rs) throws SQLException {
+		if((rs != null) && !rs.isClosed())
+			rs.close();
+		if((stmt != null) && !stmt.isClosed())
+			stmt.close();
+		if((conn != null) && !conn.isClosed())
+			conn.close();
+	}
+
 	public AtaParticipante buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -33,12 +51,7 @@ public class AtaParticipanteDAO {
 				return null;
 			}
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -63,12 +76,7 @@ public class AtaParticipanteDAO {
 			
 			return list;
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
@@ -110,12 +118,7 @@ public class AtaParticipanteDAO {
 			
 			return participante.getIdAtaParticipante();
 		}finally{
-			if((rs != null) && !rs.isClosed())
-				rs.close();
-			if((stmt != null) && !stmt.isClosed())
-				stmt.close();
-			if((conn != null) && !conn.isClosed())
-				conn.close();
+			closeConections(conn, stmt, rs);
 		}
 	}
 	
