@@ -7,7 +7,6 @@ import com.vaadin.server.Extension;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.StreamResource;
 import com.vaadin.ui.AbstractComponent;
-import com.vaadin.ui.Button;
 
 public class ExtensionUtils {
 

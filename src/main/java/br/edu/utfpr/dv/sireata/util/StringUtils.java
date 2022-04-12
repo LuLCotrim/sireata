@@ -1,7 +1,5 @@
 package br.edu.utfpr.dv.sireata.util;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.bouncycastle.jcajce.provider.digest.SHA3;
