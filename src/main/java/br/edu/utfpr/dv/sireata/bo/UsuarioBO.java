@@ -158,49 +158,53 @@ public class UsuarioBO {
 				throw new Exception("Usuário ou senha inválidos.");
 			}
 		}else{
-			LdapUtils ldapUtils = new LdapUtils(LdapConfig.getInstance().getHost(), 
-					LdapConfig.getInstance().getPort(), LdapConfig.getInstance().isUseSSL(), 
-					LdapConfig.getInstance().isIgnoreCertificates(), LdapConfig.getInstance().getBasedn(), 
-					LdapConfig.getInstance().getUidField());
-			
-			try{
-				try {
-					ldapUtils.authenticate(login, senha);
-					
-					Map<String, String> dataLdap = ldapUtils.getLdapProperties(login);
-	
-					//String cnpjCpf = dataLdap.get(LdapConfig.getInstance().getCpfField());
-					//String matricula = dataLdap.get(LdapConfig.getInstance().getRegisterField());
-					String nome = this.formatarNome(dataLdap.get(LdapConfig.getInstance().getNameField()));
-					String email = dataLdap.get(LdapConfig.getInstance().getEmailField());
-					
-					usuario.setSenha(hash);
-					
-					if(usuario.getIdUsuario() == 0){
-						usuario.setNome(nome);
-						usuario.setEmail(email);
-						usuario.setLogin(login);
-						usuario.setExterno(false);
-					}
-				} catch (CommunicationException e) {
-					if(usuario.getIdUsuario() == 0) {
-						throw new Exception("Não foi possível conectar ao servicor LDAP.");
-					} else {
-						if(!usuario.getSenha().equals(hash)){
-							throw new Exception("Usuário ou senha inválidos.");
-						}
-					}
-				}
-				
-				this.salvar(usuario);
-			}catch(Exception e){
-				Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-				
-				throw new Exception("Usuário ou senha inválidos." + System.lineSeparator() + "Detalhes: " + e.getMessage());
-			}
+			validarNaoExterno(login, senha, hash, usuario);
 		}
 		
 		return usuario;
+	}
+
+	private void validarNaoExterno(String login, String senha, String hash, Usuario usuario) throws Exception {
+		LdapUtils ldapUtils = new LdapUtils(LdapConfig.getInstance().getHost(), 
+				LdapConfig.getInstance().getPort(), LdapConfig.getInstance().isUseSSL(), 
+				LdapConfig.getInstance().isIgnoreCertificates(), LdapConfig.getInstance().getBasedn(), 
+				LdapConfig.getInstance().getUidField());
+		
+		try{
+			try {
+				ldapUtils.authenticate(login, senha);
+				
+				Map<String, String> dataLdap = ldapUtils.getLdapProperties(login);
+
+				//String cnpjCpf = dataLdap.get(LdapConfig.getInstance().getCpfField());
+				//String matricula = dataLdap.get(LdapConfig.getInstance().getRegisterField());
+				String nome = this.formatarNome(dataLdap.get(LdapConfig.getInstance().getNameField()));
+				String email = dataLdap.get(LdapConfig.getInstance().getEmailField());
+				
+				usuario.setSenha(hash);
+				
+				if(usuario.getIdUsuario() == 0){
+					usuario.setNome(nome);
+					usuario.setEmail(email);
+					usuario.setLogin(login);
+					usuario.setExterno(false);
+				}
+			} catch (CommunicationException e) {
+				if(usuario.getIdUsuario() == 0) {
+					throw new Exception("Não foi possível conectar ao servicor LDAP.");
+				} else {
+					if(!usuario.getSenha().equals(hash)){
+						throw new Exception("Usuário ou senha inválidos.");
+					}
+				}
+			}
+			
+			this.salvar(usuario);
+		}catch(Exception e){
+			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+			
+			throw new Exception("Usuário ou senha inválidos." + System.lineSeparator() + "Detalhes: " + e.getMessage());
+		}
 	}
 	
 	private String formatarNome(String nome){

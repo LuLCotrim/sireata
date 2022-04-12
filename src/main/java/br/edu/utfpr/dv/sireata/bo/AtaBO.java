@@ -2,6 +2,7 @@ package br.edu.utfpr.dv.sireata.bo;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -374,6 +375,21 @@ public class AtaBO {
 		return this.gerarAta(ata.getIdAta());
 	}
 	
+	private ByteArrayOutputStream juntarAnexos(ByteArrayOutputStream pdf, List<Anexo> anexos) throws IOException {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		PDFMergerUtility pdfMerge = new PDFMergerUtility();
+		
+		pdfMerge.setDestinationStream(output);
+		
+		pdfMerge.addSource(new ByteArrayInputStream(pdf.toByteArray()));
+		for(Anexo a : anexos){
+			pdfMerge.addSource(new ByteArrayInputStream(a.getArquivo()));
+		}
+		
+		pdfMerge.mergeDocuments(null);
+		return output;
+	}
+
 	public byte[] gerarAta(int idAta) throws Exception{
 		try{
 			AtaReport report = this.gerarAtaReport(idAta);
@@ -386,19 +402,7 @@ public class AtaBO {
 			List<Anexo> anexos = new AnexoBO().listarPorAta(idAta);
 			
 			if(anexos.size() > 0) {
-				ByteArrayOutputStream output = new ByteArrayOutputStream();
-				PDFMergerUtility pdfMerge = new PDFMergerUtility();
-				
-				pdfMerge.setDestinationStream(output);
-				
-				pdfMerge.addSource(new ByteArrayInputStream(pdf.toByteArray()));
-				for(Anexo a : anexos){
-					pdfMerge.addSource(new ByteArrayInputStream(a.getArquivo()));
-				}
-				
-				pdfMerge.mergeDocuments(null);
-				
-				return output.toByteArray();	
+				return juntarAnexos(pdf, anexos).toByteArray();	
 			} else {
 				return pdf.toByteArray();				
 			}
@@ -408,6 +412,7 @@ public class AtaBO {
 			throw new Exception(e.getMessage());
 		}
 	}
+
 	
 	public void publicar(Ata ata) throws Exception{
 		this.publicar(ata.getIdAta());
