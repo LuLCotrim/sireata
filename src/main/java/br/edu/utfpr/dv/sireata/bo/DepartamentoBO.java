@@ -4,14 +4,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.dao.DepartamentoDAO;
 import br.edu.utfpr.dv.sireata.model.Departamento;
 
-public class DepartamentoBO {
+public class DepartamentoBO extends BOFactory {
 	
 	public Departamento buscarPorId(int id) throws Exception{
 		try{
-			return new DepartamentoDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -78,12 +79,17 @@ public class DepartamentoBO {
 		}
 		
 		try{
-			return new DepartamentoDAO().salvar(departamento);
+			return getDAO().salvar(departamento);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Departamento> getDAO() {
+		return new DepartamentoDAO();
 	}
 
 }

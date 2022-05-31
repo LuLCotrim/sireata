@@ -16,6 +16,7 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import br.edu.utfpr.dv.sireata.dao.AnexoDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 import br.edu.utfpr.dv.sireata.model.Anexo;
@@ -30,11 +31,11 @@ import br.edu.utfpr.dv.sireata.model.AtaReport;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.ParticipanteReport;
 
-public class AtaBO {
+public class AtaBO extends BOFactory{
 	
 	public Ata buscarPorId(int id) throws Exception{
 		try{
-			return new AtaDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -178,7 +179,7 @@ public class AtaBO {
 	
 	public int salvar(Ata ata) throws Exception{
 		try{
-			int id = new AtaDAO().salvar(ata);
+			int id = getDAO().salvar(ata);
 			
 			if(ata.getPauta() != null){
 				int i = 1;
@@ -473,4 +474,8 @@ public class AtaBO {
 		return resultado;
 	}
 
+	@Override
+	public DAOSuper<Ata> getDAO() {
+		return new AtaDAO();
+	}
 }

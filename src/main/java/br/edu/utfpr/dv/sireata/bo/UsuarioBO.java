@@ -9,13 +9,14 @@ import java.util.logging.Logger;
 
 import javax.naming.CommunicationException;
 
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.dao.UsuarioDAO;
 import br.edu.utfpr.dv.sireata.ldap.LdapConfig;
 import br.edu.utfpr.dv.sireata.ldap.LdapUtils;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 import br.edu.utfpr.dv.sireata.util.StringUtils;
 
-public class UsuarioBO {
+public class UsuarioBO extends BOFactory{
 	
 	public List<Usuario> listarTodos(boolean apenasAtivos) throws Exception{
 		try {
@@ -49,7 +50,7 @@ public class UsuarioBO {
 				throw new Exception("Informe o nome.");
 			}
 			
-			return new UsuarioDAO().salvar(usuario);
+			return getDAO().salvar(usuario);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -69,7 +70,7 @@ public class UsuarioBO {
 	
 	public Usuario buscarPorId(int id) throws Exception{
 		try {
-			return new UsuarioDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		} catch (SQLException e) {
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -220,6 +221,11 @@ public class UsuarioBO {
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Usuario> getDAO() {
+		return new UsuarioDAO();
 	}
 	
 }

@@ -4,16 +4,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.OrgaoMembro;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 
-public class OrgaoBO {
+public class OrgaoBO extends BOFactory{
 	
 	public Orgao buscarPorId(int id) throws Exception{
 		try{
-			return new OrgaoDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -141,12 +142,18 @@ public class OrgaoBO {
 		}
 		
 		try{
-			return new OrgaoDAO().salvar(orgao);
+			return getDAO().salvar(orgao);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Orgao> getDAO() {
+		// TODO Auto-generated method stub
+		return new OrgaoDAO();
 	}
 
 }

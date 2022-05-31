@@ -5,13 +5,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 
-public class AtaParticipanteBO {
+public class AtaParticipanteBO extends BOFactory{
 	
 	public AtaParticipante buscarPorId(int id) throws Exception{
 		try{
-			return new AtaParticipanteDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -49,7 +50,7 @@ public class AtaParticipanteBO {
 			
 			this.validarDados(participante);
 			
-			return new AtaParticipanteDAO().salvar(participante);
+			return getDAO().salvar(participante);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -69,6 +70,11 @@ public class AtaParticipanteBO {
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<AtaParticipante> getDAO() {
+		return new AtaParticipanteDAO();
 	}
 
 }

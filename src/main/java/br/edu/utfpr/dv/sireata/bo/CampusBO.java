@@ -5,13 +5,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.edu.utfpr.dv.sireata.dao.CampusDAO;
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.model.Campus;
 
-public class CampusBO {
+public class CampusBO extends BOFactory{
 	
 	public Campus buscarPorId(int id) throws Exception{
 		try{
-			return new CampusDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -65,12 +66,18 @@ public class CampusBO {
 		}
 		
 		try{
-			return new CampusDAO().salvar(campus);
+			return getDAO().salvar(campus);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Campus> getDAO() {
+		// TODO Auto-generated method stub
+		return new CampusDAO();
 	}
 
 }

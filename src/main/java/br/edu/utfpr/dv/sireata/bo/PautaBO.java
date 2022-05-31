@@ -4,14 +4,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
-public class PautaBO {
+public class PautaBO extends BOFactory{
 	
 	public Pauta buscarPorId(int id) throws Exception{
 		try{
-			return new PautaDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -43,7 +44,7 @@ public class PautaBO {
 			
 			this.validarDados(pauta);
 			
-			return new PautaDAO().salvar(pauta);
+			return getDAO().salvar(pauta);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -63,6 +64,11 @@ public class PautaBO {
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Pauta> getDAO() {
+		return new PautaDAO();
 	}
 
 }

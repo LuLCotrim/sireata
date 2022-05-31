@@ -5,14 +5,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.edu.utfpr.dv.sireata.dao.ComentarioDAO;
+import br.edu.utfpr.dv.sireata.dao.DAOSuper;
 import br.edu.utfpr.dv.sireata.model.Comentario;
 import br.edu.utfpr.dv.sireata.model.Comentario.SituacaoComentario;
 
-public class ComentarioBO {
+public class ComentarioBO extends BOFactory{
 	
 	public Comentario buscarPorId(int id) throws Exception{
 		try{
-			return new ComentarioDAO().buscarPorId(id);
+			return getDAO().buscarPorId(id);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
@@ -57,12 +58,17 @@ public class ComentarioBO {
 			
 			this.validarDados(comentario);
 			
-			return new ComentarioDAO().salvar(comentario);
+			return getDAO().salvar(comentario);
 		}catch(Exception e){
 			Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
 			
 			throw new Exception(e.getMessage());
 		}
+	}
+
+	@Override
+	public DAOSuper<Comentario> getDAO() {
+		return new ComentarioDAO();
 	}
 
 }
