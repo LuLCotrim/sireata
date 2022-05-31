@@ -10,7 +10,7 @@ import java.util.List;
 
 import br.edu.utfpr.dv.sireata.model.Anexo;
 
-public class AnexoDAO {
+public class AnexoDAO extends DAOSuper<Anexo> {
 
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -30,6 +30,7 @@ public class AnexoDAO {
 			conn.close();
 	}
 	
+	@Override
 	public Anexo buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -53,7 +54,7 @@ public class AnexoDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+
 	public List<Anexo> listarPorAta(int idAta) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;
@@ -77,7 +78,7 @@ public class AnexoDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+	@Override
 	public int salvar(Anexo anexo) throws SQLException{
 		boolean insert = (anexo.getIdAnexo() == 0);
 		Connection conn = null;
@@ -117,7 +118,6 @@ public class AnexoDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
 	public void excluir(int id) throws SQLException{
 		Connection conn = null;
 		Statement stmt = null;

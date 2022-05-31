@@ -13,7 +13,7 @@ import br.edu.utfpr.dv.sireata.model.Ata;
 import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
 import br.edu.utfpr.dv.sireata.util.DateUtils;
 
-public class AtaDAO {
+public class AtaDAO extends DAOSuper<Ata> {
 
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -32,7 +32,7 @@ public class AtaDAO {
 		if((conn != null) && !conn.isClosed())
 			conn.close();
 	}
-	
+	@Override
 	public Ata buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;

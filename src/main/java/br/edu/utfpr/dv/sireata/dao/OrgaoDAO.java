@@ -12,7 +12,7 @@ import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.OrgaoMembro;
 import br.edu.utfpr.dv.sireata.model.Usuario;
 
-public class OrgaoDAO {
+public class OrgaoDAO extends DAOSuper<Orgao> {
 	
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -31,7 +31,7 @@ public class OrgaoDAO {
 		if((conn != null) && !conn.isClosed())
 			conn.close();
 	}
-
+	@Override
 	public Orgao buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -277,7 +277,7 @@ public class OrgaoDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+	@Override
 	public int salvar(Orgao orgao) throws SQLException{
 		boolean insert = (orgao.getIdOrgao() == 0);
 		Connection conn = null;

@@ -10,7 +10,7 @@ import java.util.List;
 
 import br.edu.utfpr.dv.sireata.model.Pauta;
 
-public class PautaDAO {
+public class PautaDAO extends DAOSuper<Pauta> {
 
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -29,7 +29,7 @@ public class PautaDAO {
 		if((conn != null) && !conn.isClosed())
 			conn.close();
 	}
-	
+	@Override
 	public Pauta buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -75,7 +75,7 @@ public class PautaDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+	@Override
 	public int salvar(Pauta pauta) throws SQLException{
 		boolean insert = (pauta.getIdPauta() == 0);
 		Connection conn = null;

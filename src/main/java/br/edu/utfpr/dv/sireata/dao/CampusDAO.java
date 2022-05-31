@@ -11,7 +11,7 @@ import java.util.List;
 
 import br.edu.utfpr.dv.sireata.model.Campus;
 
-public class CampusDAO {
+public class CampusDAO extends DAOSuper<Campus> {
 
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -30,7 +30,7 @@ public class CampusDAO {
 		if((conn != null) && !conn.isClosed())
 			conn.close();
 	}
-	
+	@Override
 	public Campus buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -155,7 +155,7 @@ public class CampusDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+	@Override
 	public int salvar(Campus campus) throws SQLException{
 		boolean insert = (campus.getIdCampus() == 0);
 		Connection conn = null;

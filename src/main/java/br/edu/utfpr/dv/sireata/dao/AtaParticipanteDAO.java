@@ -10,7 +10,7 @@ import java.util.List;
 
 import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 
-public class AtaParticipanteDAO {
+public class AtaParticipanteDAO extends DAOSuper<AtaParticipante> {
 	
 	private void closeConections(Connection conn, PreparedStatement stmt, ResultSet rs) throws SQLException {
 		if((rs != null) && !rs.isClosed())
@@ -29,7 +29,7 @@ public class AtaParticipanteDAO {
 		if((conn != null) && !conn.isClosed())
 			conn.close();
 	}
-
+	@Override
 	public AtaParticipante buscarPorId(int id) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -79,7 +79,7 @@ public class AtaParticipanteDAO {
 			closeConections(conn, stmt, rs);
 		}
 	}
-	
+	@Override
 	public int salvar(AtaParticipante participante) throws SQLException{
 		boolean insert = (participante.getIdAtaParticipante() == 0);
 		Connection conn = null;
